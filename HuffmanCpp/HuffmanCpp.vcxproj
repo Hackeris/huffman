@@ -142,6 +142,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="byte_stream_to_bit_adapter.cpp" />
+    <ClCompile Include="char_count_map.cpp" />
+    <ClCompile Include="huffman_file_decoder.cpp" />
+    <ClCompile Include="huffman_file_encoder.cpp" />
+    <ClCompile Include="huffman_node.cpp" />
+    <ClCompile Include="huffman_stream_decoder.cpp" />
+    <ClCompile Include="huffman_stream_encoder.cpp" />
+    <ClCompile Include="huffman_tree.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
