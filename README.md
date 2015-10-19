@@ -1,0 +1,3 @@
+# huffman
+
+Huffman in C++
