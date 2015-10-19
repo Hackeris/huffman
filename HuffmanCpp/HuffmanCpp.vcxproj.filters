@@ -36,10 +36,10 @@
     <ClCompile Include="huffman_stream_decoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="huffman_stream_encoder.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="huffman_tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_stream_encoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
