@@ -5,6 +5,7 @@
 #include "huffman_file_encoder.h"
 #include "huffman_file_compressor.h"
 #include "huffman_file_extractor.h"
+
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
