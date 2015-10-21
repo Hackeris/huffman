@@ -143,6 +143,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="test.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="decode.h" />
+    <ClInclude Include="encode.h" />
+    <ClInclude Include="def.h" />
+    <ClInclude Include="file.h" />
+    <ClInclude Include="huffman.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
