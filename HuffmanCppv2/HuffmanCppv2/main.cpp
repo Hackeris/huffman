@@ -239,6 +239,7 @@ public:
 	}
 private:
 	void writeCodeToBuffer(const std::string& code) {
+		std::cout << code;
 		strcpy(&buffer[end], code.c_str());
 		end += code.length();
 	}
@@ -278,6 +279,78 @@ private:
 	std::istream *in;
 };
 
+class ByteToBitStreamAdapter {
+public:
+	ByteToBitStreamAdapter(std::istream& in)
+		:in(in) {
+		this->pos = 0;
+		this->start = 0;
+	}
+	void init(int countOfBit) {
+		this->streamSizeOfBit = countOfBit;
+		in.read((char*)&this->buffer, sizeof(byte));
+	}
+	bool end() {
+		return pos >= streamSizeOfBit;
+	}
+	int readBit() {
+		if (start >= 8) {
+			start = 0;
+			in.read((char*)&this->buffer, sizeof(byte));
+		}
+		int bit = (buffer & (1 << (7 - start))) ? 1 : 0;
+		start++;
+		pos++;
+		return bit;
+	}
+private:
+	std::istream& in;
+	byte buffer;
+	int start;
+	int pos;
+	int streamSizeOfBit;
+};
+
+class HuffmanFileDecoder {
+public:
+	HuffmanFileDecoder(HuffmanNode* tree) {
+		this->treeRoot = tree;
+	}
+	void decodeFile(std::istream& in, int codeLength) {
+		this->in = new ByteToBitStreamAdapter(in);
+		this->in->init(codeLength);
+	}
+	void writeToFile(std::ostream& out) {
+		while (!in->end()) {
+			byte b = readEncodedByte();
+			out.write((char*)&b, sizeof(byte));
+		}
+	}
+	~HuffmanFileDecoder() {
+		delete in;
+	}
+private:
+	byte readEncodedByte() {
+		HuffmanNode* node = this->treeRoot;
+		while (!node->isLeaf()) {
+			IntlNode* inode = static_cast<IntlNode*>(node);
+			int bit = this->in->readBit();
+			if (bit == 0) {
+				node = inode->left();
+			}
+			else {
+				node = inode->right();
+			}
+		}
+		LeafNode* leaf = static_cast<LeafNode*>(node);
+		return leaf->val();
+	}
+private:
+	HuffmanNode* treeRoot;
+	ByteToBitStreamAdapter *in;
+	byte buffer;
+};
+
 class HuffmanTree {
 private:
 	HuffmanNode *Root;
@@ -294,7 +367,7 @@ public:
 		return this->Root;
 	}
 
-	int weight() const{
+	int weight() const {
 		return this->Root->weight();
 	}
 
@@ -344,6 +417,10 @@ public:
 		return HuffmanFileEncoder(encodeMap);
 	}
 
+	HuffmanFileDecoder toFileDecoder() {
+		return HuffmanFileDecoder(this->root());
+	}
+
 	~HuffmanTree() { }
 private:
 	void travel(HuffmanNode* node, std::string& code, 
@@ -376,6 +453,31 @@ public:
 		byte b;
 		while (in.read((char *)&b, sizeof(byte))) {
 			this->byteCounts[b]++;
+		}
+	}
+
+	void saveToFile(std::ostream& out) {
+		int tableSize = byteCounts.size();
+		out.write((char*)&tableSize, sizeof(int));
+
+		for (auto& kv : this->byteCounts) {
+			out.write((char*)&kv.first, sizeof(kv.first));
+			out.write((char*)&kv.second, sizeof(kv.second));
+		}
+	}
+
+	void readFromFile(std::istream& in) {
+
+		int tableSize;
+		in.read((char*)&tableSize, sizeof(int));
+
+		int i;
+		for (i = 0; i < tableSize; i++){
+			byte b;
+			int count;
+			in.read((char*)&b, sizeof(byte));
+			in.read((char*)&count, sizeof(int));
+			this->byteCounts[b] = count;
 		}
 	}
 
@@ -441,10 +543,16 @@ void testEncode() {
 
 	HuffmanFileEncoder encoder = tree->toFileEncoder();
 	encoder.encodeFile(in);
-	encoder.writeToFile(out);
+	int length = encoder.writeToFile(out);
 
 	in.close();
 	out.close();
+
+	HuffmanFileDecoder decoder = tree->toFileDecoder();
+	std::ifstream cmp("comp.txt", std::ios::binary);
+	std::ofstream ex("ext.txt", std::ios::binary);
+	decoder.decodeFile(cmp, length);
+	decoder.writeToFile(ex);
 
 	tree->freeNodes();
 	delete forest;
