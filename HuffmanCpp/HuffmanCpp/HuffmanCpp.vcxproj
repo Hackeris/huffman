@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E44AC0C7-259A-4444-8BD4-B47E178DA724}</ProjectGuid>
+    <ProjectGuid>{404BF7B8-B85E-4027-B8CA-9E69E156A17A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>HuffmanCpp</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -142,28 +142,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="byte_stream_to_bit_adapter.cpp" />
-    <ClCompile Include="char_count_map.cpp" />
-    <ClCompile Include="huffman_file_decoder.cpp" />
-    <ClCompile Include="huffman_file_encoder.cpp" />
-    <ClCompile Include="huffman_node.cpp" />
-    <ClCompile Include="huffman_stream_decoder.cpp" />
-    <ClCompile Include="huffman_stream_encoder.cpp" />
-    <ClCompile Include="huffman_tree.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="old.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="byte_stream_to_bit_adapter.h" />
-    <ClInclude Include="char_count_map.h" />
+    <ClInclude Include="byte_count_map.h" />
+    <ClInclude Include="byte_to_bit_stream_adapter.h" />
     <ClInclude Include="def.h" />
-    <ClInclude Include="huffman_stream_decoder.h" />
-    <ClInclude Include="huffman_char_code_map.h" />
+    <ClInclude Include="encode_map.h" />
+    <ClInclude Include="heap.h" />
+    <ClInclude Include="huffman_file_compressor.h" />
     <ClInclude Include="huffman_file_decoder.h" />
     <ClInclude Include="huffman_file_encoder.h" />
+    <ClInclude Include="huffman_file_extractor.h" />
     <ClInclude Include="huffman_node.h" />
-    <ClInclude Include="huffman_stream_encoder.h" />
     <ClInclude Include="huffman_tree.h" />
+    <ClInclude Include="internal_node.h" />
+    <ClInclude Include="leaf_node.h" />
+    <ClInclude Include="priority_queue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

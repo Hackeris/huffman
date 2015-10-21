@@ -1,94 +1,121 @@
 #include <iostream>
+#include <fstream>
+#include "huffman_file_compressor.h"
+#include "huffman_file_extractor.h"
 
-template <typename E>
-class Compare {
+class application {
 public:
-	static bool smaller(const E& l, const E& r) {
-		return l < r;
+	application(int argc, char** argv) {
+		this->argc = argc;
+		this->argv = argv;
+	}
+	virtual int run() = 0;
+	virtual ~application(){}
+protected:
+	int argc;
+	char** argv;
+};
+
+class command {
+public:
+	virtual int execute() = 0;
+	virtual ~command() {}
+};
+
+class compress_command 
+	: public command{
+public:
+	compress_command(const char* in, const char* out) 
+		:input_file_path(in), output_file_path(out){
+	}
+	int execute() {
+
+		huffman_file_compressor compressor;
+		std::ifstream in(input_file_path);
+		std::ofstream out(output_file_path);
+		compressor.compress(in, out);
+		in.close();
+		out.close();
+		return 0;
+	}
+private:
+	std::string input_file_path;
+	std::string output_file_path;
+};
+
+class extract_command 
+	: public command{
+public:
+	extract_command(const char* in, const char* out)
+		:input_file_path(in), output_file_path(out) {
+	}
+	int execute() {
+
+		huffman_file_extractor extractor;
+		std::ifstream in(input_file_path);
+		std::ofstream out(output_file_path);
+		extractor.extract(in, out);
+		in.close();
+		out.close();
+		return 0;
+	}
+private:
+	std::string input_file_path;
+	std::string output_file_path;
+};
+
+class huffman_app 
+	:public application {
+public:
+	huffman_app(int argc, char** argv) 
+		: application(argc, argv){
+	}
+	int run() {
+
+		command* cmd = NULL;
+		int i;
+		
+		if (argc < 4) {
+			usage();
+			return 1;
+		}
+
+		if (strcmp(argv[1], "-c") == 0) {
+			cmd = new compress_command(argv[2], argv[3]);
+		}
+		else if (strcmp(argv[1], "-x") == 0) {
+			cmd = new extract_command(argv[2], argv[3]);
+		}
+
+		int ret = cmd->execute();
+		delete cmd;
+		return ret;
+	}
+	void usage() {
+		printf("Usage:\n");
+		printf("\tcompress: %s -c in out\n", get_command_file_name());
+		printf("\textract: %s -x in out\n", get_command_file_name());
+	}
+	char* get_command_file_name() {
+		char *cmd = &argv[0][strlen(argv[0]) -1];
+		while (*cmd != '\\') {
+			cmd--;
+		}
+		return ++cmd;
 	}
 };
 
-template <typename E, typename Comp>
-class Heap {
-public:
-	Heap(E* h, int num, int max) {
-		this->heap = h;
-		this->n = num;
-		this->maxSize = max;
-	}
-	int size() const {
-		return n;
-	}
-	bool isLeaf(int pos) const {
-		return (pos >= n / 2) && (pos < n);
-	}
-	int leftChild(int pos) const {
-		return pos * 2 + 1;
-	}
-	int rightChild(int pos) const {
-		return pos * 2 + 2;
-	}
-	int parent(int pos) const {
-		return (pos - 1) / 2;
-	}
-	void biuldHeap() {
-		for (int i = n / 2 - 1; i >= 0; i--) {
-			siftdown(i);
-		}
-	}
-	E removeFirst() {
-		swap(heap, 0, --n);
-		if (n != 0) {
-			siftdown(0);
-		}
-		return heap[n];
-	}
-private:
-	void siftdown(int pos) {
-		while (!isLeaf(pos)) {
-			int j = leftChild(pos);
-			int rc = rightChild(pos);
-			if ((rc < n) && Comp::smaller(heap[rc], heap[j])) {
-				j = rc;
-			}
-			if (Comp::smaller(heap[pos], heap[j])){
-				return;
-			}
-			swap(heap, pos, j);
-			pos = j;
-		}
-	}
-	void swap(E* h, int p, int q) {
-		E tmp = h[p];
-		h[p] = h[q];
-		h[q] = tmp;
-	}
-	void insert(const E& it) {
-		int curr = n++;
-		this->heap[curr] = it;
-		while ((curr != 0) &&
-			Comp::smaller(heap[curr], heap[parent(curr)])) {
-			swap(this->heap, curr, parent(curr));
-			curr = parent(curr);
-		}
-	}
-private:
-	E* heap;
-	int n;
-	int maxSize;
-};
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
+int main(int argc, char** argv) {
 
+	application* app = new huffman_app(argc, argv);
+	app->run();
+	delete app;
 
-int main() {
-
-	int buffer[] = { 4,8,2,1,5,9,3,7,0,6 };
-	int n = 10;
-	Heap<int, Compare<int>> heap(buffer, n, n);
-	heap.biuldHeap();
-	while (heap.size() > 0) {
-		std::cout << heap.removeFirst() << std::endl;
-	}
+//	_CrtDumpMemoryLeaks();
 
 	return 0;
 }

@@ -1,18 +1,13 @@
-#ifndef HUFFMAN_NODE
-#define HUFFMAN_NODE
-
-#include <cstdlib>
-#include "def.h"
+#ifndef HUFFMAN_NODE 
+#define HUFFMAN_NODE 
 
 class huffman_node {
 public:
-	byte c;
-	int count;
-	huffman_node* left, *right;
-public:
-	huffman_node();
-	huffman_node(huffman_node* left, huffman_node* right);
-};
+	virtual ~huffman_node() { }
 
+	virtual int weight() = 0;
+
+	virtual bool is_leaf() = 0;
+};
 
 #endif

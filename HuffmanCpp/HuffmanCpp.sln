@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HuffmanCpp", "HuffmanCpp\HuffmanCpp.vcxproj", "{E44AC0C7-259A-4444-8BD4-B47E178DA724}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HuffmanCpp", "HuffmanCpp\HuffmanCpp.vcxproj", "{404BF7B8-B85E-4027-B8CA-9E69E156A17A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Debug|x64.ActiveCfg = Debug|x64
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Debug|x64.Build.0 = Debug|x64
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Debug|x86.ActiveCfg = Debug|Win32
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Debug|x86.Build.0 = Debug|Win32
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Release|x64.ActiveCfg = Release|x64
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Release|x64.Build.0 = Release|x64
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Release|x86.ActiveCfg = Release|Win32
-		{E44AC0C7-259A-4444-8BD4-B47E178DA724}.Release|x86.Build.0 = Release|Win32
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Debug|x64.ActiveCfg = Debug|x64
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Debug|x64.Build.0 = Debug|x64
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Debug|x86.ActiveCfg = Debug|Win32
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Debug|x86.Build.0 = Debug|Win32
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Release|x64.ActiveCfg = Release|x64
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Release|x64.Build.0 = Release|x64
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Release|x86.ActiveCfg = Release|Win32
+		{404BF7B8-B85E-4027-B8CA-9E69E156A17A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
