@@ -21,16 +21,16 @@ void test_decode() {
 	uncom.close();
 }
 
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-
-int main() {
-
-	test_encode();
-	test_decode();
-
-	_CrtDumpMemoryLeaks();
-
-	return 0;
-}
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
+//
+//int main() {
+//
+//	test_encode();
+//	test_decode();
+//
+//	_CrtDumpMemoryLeaks();
+//
+//	return 0;
+//}

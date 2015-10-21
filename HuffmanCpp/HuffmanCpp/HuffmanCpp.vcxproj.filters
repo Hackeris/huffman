@@ -13,66 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="old">
+      <UniqueIdentifier>{d882520f-8976-4aa4-b456-bf713bac3ece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="old\header">
+      <UniqueIdentifier>{32d6b300-4651-404c-b836-b57bee03d635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="old\source">
+      <UniqueIdentifier>{cea24f1e-af13-400c-ab30-236d1be5426c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="byte_stream_to_bit_adapter.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="char_count_map.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_decoder.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_encoder.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_node.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_stream_decoder.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_stream_encoder.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_tree.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
+    <ClCompile Include="old.cpp">
+      <Filter>old\source</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="byte_stream_to_bit_adapter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="char_count_map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_file_decoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_file_encoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_stream_decoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_stream_encoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="huffman_char_code_map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="huffman_node.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="byte_stream_to_bit_adapter.h">
+      <Filter>old\header</Filter>
     </ClInclude>
     <ClInclude Include="char_count_map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="byte_stream_to_bit_adapter.h">
-      <Filter>Header Files</Filter>
+      <Filter>old\header</Filter>
     </ClInclude>
     <ClInclude Include="def.h">
-      <Filter>Header Files</Filter>
+      <Filter>old\header</Filter>
     </ClInclude>
-    <ClInclude Include="huffman_tree.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="huffman_char_code_map.h">
+      <Filter>old\header</Filter>
     </ClInclude>
     <ClInclude Include="huffman_file_decoder.h">
-      <Filter>Header Files</Filter>
+      <Filter>old\header</Filter>
     </ClInclude>
     <ClInclude Include="huffman_file_encoder.h">
-      <Filter>Header Files</Filter>
+      <Filter>old\header</Filter>
     </ClInclude>
-    <ClInclude Include="huffman_stream_encoder.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="huffman_node.h">
+      <Filter>old\header</Filter>
     </ClInclude>
     <ClInclude Include="huffman_stream_decoder.h">
-      <Filter>Header Files</Filter>
+      <Filter>old\header</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_stream_encoder.h">
+      <Filter>old\header</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_tree.h">
+      <Filter>old\header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

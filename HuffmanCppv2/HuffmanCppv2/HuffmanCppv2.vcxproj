@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E44AC0C7-259A-4444-8BD4-B47E178DA724}</ProjectGuid>
+    <ProjectGuid>{648115D6-3071-480D-975A-AD990777511E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>HuffmanCpp</RootNamespace>
+    <RootNamespace>HuffmanCppv2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,27 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="byte_stream_to_bit_adapter.cpp" />
-    <ClCompile Include="char_count_map.cpp" />
-    <ClCompile Include="huffman_file_decoder.cpp" />
-    <ClCompile Include="huffman_file_encoder.cpp" />
-    <ClCompile Include="huffman_node.cpp" />
-    <ClCompile Include="huffman_stream_decoder.cpp" />
-    <ClCompile Include="huffman_stream_encoder.cpp" />
-    <ClCompile Include="huffman_tree.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="byte_stream_to_bit_adapter.h" />
-    <ClInclude Include="char_count_map.h" />
-    <ClInclude Include="def.h" />
-    <ClInclude Include="huffman_stream_decoder.h" />
-    <ClInclude Include="huffman_char_code_map.h" />
-    <ClInclude Include="huffman_file_decoder.h" />
-    <ClInclude Include="huffman_file_encoder.h" />
-    <ClInclude Include="huffman_node.h" />
-    <ClInclude Include="huffman_stream_encoder.h" />
-    <ClInclude Include="huffman_tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
