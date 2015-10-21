@@ -511,6 +511,53 @@ private:
 	int count;
 };
 
+class HuffmanFileCompressor{
+public:
+	void compress(std::istream& in, std::ostream& out) {
+		ByteCountTable table;
+		table.loadFromFile(in);
+		table.saveToFile(out);
+		HuffmanTree** forest = table.toSimpleHuffmanForest();
+		HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
+
+		in.clear();
+		in.seekg(0, std::ios::beg);
+
+		HuffmanFileEncoder encoder = tree->toFileEncoder();
+		encoder.encodeFile(in);
+		out.seekp(sizeof(int), std::ios::cur);
+		int lengthOffset = out.tellp();
+		int length = encoder.writeToFile(out);
+		out.seekp(lengthOffset, std::ios::beg);
+		out.write((char*)&length, sizeof(int));
+
+		tree->freeNodes();
+		delete forest;
+		delete tree;
+	}
+};
+
+class HuffmanFileExtractor {
+public:
+	void extract(std::istream& in, std::ostream& out) {
+		ByteCountTable table;
+		table.readFromFile(in);
+		HuffmanTree** forest = table.toSimpleHuffmanForest();
+		HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
+
+		int length;
+		in.read((char*)&length, sizeof(int));
+
+		HuffmanFileDecoder decoder = tree->toFileDecoder();
+		decoder.decodeFile(in, length);
+		decoder.writeToFile(out);
+
+		tree->freeNodes();
+		delete forest;
+		delete tree;
+	}
+};
+
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
