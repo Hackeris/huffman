@@ -1,94 +1,121 @@
 #include <iostream>
 #include <fstream>
-#include "byte_count_map.h"
-#include "huffman_tree.h"
-#include "huffman_file_encoder.h"
 #include "huffman_file_compressor.h"
 #include "huffman_file_extractor.h"
 
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
+class application {
+public:
+	application(int argc, char** argv) {
+		this->argc = argc;
+		this->argv = argv;
+	}
+	virtual int run() = 0;
+	virtual ~application(){}
+protected:
+	int argc;
+	char** argv;
+};
 
-void test_tree() {
+class command {
+public:
+	virtual int execute() = 0;
+	virtual ~command() {}
+};
 
-	std::ifstream in("test.txt");
-	byte_count_table table;
-	table.load_from_file(in);
-	in.close();
-	huffman_tree** forest = table.to_simple_huffman_forest();
-	huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
+class compress_command 
+	: public command{
+public:
+	compress_command(const char* in, const char* out) 
+		:input_file_path(in), output_file_path(out){
+	}
+	int execute() {
 
-	tree->free_nodes();
-	delete forest;
-	delete tree;
-}
+		huffman_file_compressor compressor;
+		std::ifstream in(input_file_path);
+		std::ofstream out(output_file_path);
+		compressor.compress(in, out);
+		in.close();
+		out.close();
+		return 0;
+	}
+private:
+	std::string input_file_path;
+	std::string output_file_path;
+};
 
-void test_encode() {
+class extract_command 
+	: public command{
+public:
+	extract_command(const char* in, const char* out)
+		:input_file_path(in), output_file_path(out) {
+	}
+	int execute() {
 
-	std::ifstream in("test.txt");
-	std::ofstream out("comp.txt");
-	byte_count_table table;
-	table.load_from_file(in);
-	huffman_tree** forest = table.to_simple_huffman_forest();
-	huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
+		huffman_file_extractor extractor;
+		std::ifstream in(input_file_path);
+		std::ofstream out(output_file_path);
+		extractor.extract(in, out);
+		in.close();
+		out.close();
+		return 0;
+	}
+private:
+	std::string input_file_path;
+	std::string output_file_path;
+};
 
-	in.clear();
-	in.seekg(0, std::ios::beg);
+class huffman_app 
+	:public application {
+public:
+	huffman_app(int argc, char** argv) 
+		: application(argc, argv){
+	}
+	int run() {
 
-	huffman_file_encoder encoder = tree->to_file_encoder();
-	encoder.encode_file(in);
-	int length = encoder.write_to_file(out);
+		command* cmd = NULL;
+		int i;
+		
+		if (argc < 4) {
+			usage();
+			return 1;
+		}
 
-	in.close();
-	out.close();
+		if (strcmp(argv[1], "-c") == 0) {
+			cmd = new compress_command(argv[2], argv[3]);
+		}
+		else if (strcmp(argv[1], "-x") == 0) {
+			cmd = new extract_command(argv[2], argv[3]);
+		}
 
-	huffman_file_decoder decoder = tree->to_file_decoder();
-	std::ifstream cmp("comp.txt", std::ios::binary);
-	std::ofstream ex("ext.txt", std::ios::binary);
-	decoder.decode_file(cmp, length);
-	decoder.write_to_file(ex);
+		int ret = cmd->execute();
+		delete cmd;
+		return ret;
+	}
+	void usage() {
+		printf("Usage:\n");
+		printf("\tcompress: %s -c in out\n", get_command_file_name());
+		printf("\textract: %s -x in out\n", get_command_file_name());
+	}
+	char* get_command_file_name() {
+		char *cmd = &argv[0][strlen(argv[0]) -1];
+		while (*cmd != '\\') {
+			cmd--;
+		}
+		return ++cmd;
+	}
+};
 
-	tree->free_nodes();
-	delete forest;
-	delete tree;
-}
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
-void test_compress() {
-	std::ifstream in("test.txt", std::ios::binary);
-	std::ofstream out("compressed.txt", std::ios::binary);
+int main(int argc, char** argv) {
 
-	huffman_file_compressor compressor;
-	compressor.compress(in, out);
+	application* app = new huffman_app(argc, argv);
+	app->run();
+	delete app;
 
-	in.close();
-	out.close();
-}
-
-void test_extract() {
-	std::ifstream in("compressed.txt", std::ios::binary);
-	std::ofstream out("extracted.txt", std::ios::binary);
-
-	huffman_file_extractor extractor;
-	extractor.extract(in, out);
-
-	in.close();
-	out.close();
-}
-
-void test_compress_and_extract() {
-
-	test_compress();
-	test_extract();
-}
-
-int main() {
-
-	test_tree();
-	test_encode();
-	test_compress_and_extract();
-
-	_CrtDumpMemoryLeaks();
+//	_CrtDumpMemoryLeaks();
 
 	return 0;
 }
