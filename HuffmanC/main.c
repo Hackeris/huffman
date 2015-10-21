@@ -244,7 +244,8 @@ byte_to_bit_stream* open_bit_stream(FILE* fp_in, int code_length) {
 
 	byte_to_bit_stream* btb =
 		(byte_to_bit_stream*)malloc(sizeof(byte_to_bit_stream));
-	fread(&btb->buffer, sizeof(byte), 1, fp_in);
+	btb->fp_in = fp_in;
+	fread(&btb->buffer, sizeof(byte), 1, btb->fp_in);
 	btb->offset = btb->buffer_offset = 0;
 	btb->code_length = code_length;
 	return btb;
@@ -289,7 +290,8 @@ void decode_to_file(huffman_tree* htree, FILE* fp_in,
 
 	byte_to_bit_stream* btbs = open_bit_stream(fp_in, code_length);
 	while (!bfeof(btbs)) {
-
+		byte b = read_decoded_byte(btbs, htree);
+		fwrite(&b, sizeof(byte), 1, fp_out);
 	}
 	close_bit_stream(btbs);
 }
@@ -352,12 +354,38 @@ void test_encode_file() {
 	fclose(fp_out);
 }
 
+void test_decode_file() {
+
+	FILE* fp = fopen("test.txt", "rb");
+	byte_freq_map *freq_map = get_freq_map(fp);
+
+	huffman_tree* htree = build_huffman_tree(freq_map);
+	byte_code_map* bcmap = build_byte_to_code_map(htree);
+
+	FILE* fp_out = fopen("com.txt", "wb");
+	fseek(fp, 0, SEEK_SET);
+	int code_length = encode_file_to(bcmap, fp, fp_out);
+	fclose(fp_out);
+
+	fp_out = fopen("com.txt", "rb");
+	FILE* fp_to = fopen("out.txt", "wb");
+	decode_to_file(htree, fp_out, fp_to, code_length);
+	
+	free_huffman_tree(htree);
+	free(freq_map);
+	free_byte_to_code_map(bcmap);
+	fclose(fp);
+	fclose(fp_out);
+	fclose(fp_to);
+}
+
 int main() {
 
 	test_freq_map();
 	test_build_huffman_tree();
 	test_build_code_map();
 	test_encode_file();
+	test_decode_file();
 
 	_CrtDumpMemoryLeaks();
 
