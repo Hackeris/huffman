@@ -1,3 +1,3 @@
 # huffman
 
-Huffman in C++
+Huffman in C and C++
