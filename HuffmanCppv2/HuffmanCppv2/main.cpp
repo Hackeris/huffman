@@ -525,8 +525,8 @@ public:
 
 		HuffmanFileEncoder encoder = tree->toFileEncoder();
 		encoder.encodeFile(in);
-		out.seekp(sizeof(int), std::ios::cur);
 		int lengthOffset = out.tellp();
+		out.seekp(sizeof(int), std::ios::cur);
 		int length = encoder.writeToFile(out);
 		out.seekp(lengthOffset, std::ios::beg);
 		out.write((char*)&length, sizeof(int));
@@ -546,6 +546,7 @@ public:
 		HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
 
 		int length;
+		int offset = in.tellg();
 		in.read((char*)&length, sizeof(int));
 
 		HuffmanFileDecoder decoder = tree->toFileDecoder();
@@ -606,10 +607,39 @@ void testEncode() {
 	delete tree;
 }
 
+void testCompress() {
+	std::ifstream in("test.txt", std::ios::binary);
+	std::ofstream out("compressed.txt", std::ios::binary);
+
+	HuffmanFileCompressor compressor;
+	compressor.compress(in, out);
+
+	in.close();
+	out.close();
+}
+
+void testExtract() {
+	std::ifstream in("compressed.txt", std::ios::binary);
+	std::ofstream out("extracted.txt", std::ios::binary);
+
+	HuffmanFileExtractor extractor;
+	extractor.extract(in, out);
+
+	in.close();
+	out.close();
+}
+
+void testCompressAndExtract() {
+
+	testCompress();
+	testExtract();
+}
+
 int main() {
 
 	testTree();
 	testEncode();
+	testCompressAndExtract();
 
 	_CrtDumpMemoryLeaks();
 
