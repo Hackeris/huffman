@@ -8,21 +8,21 @@
 
 typedef unsigned char byte;
 
-class HuffmanNode {
+class huffman_node {
 public:
-	virtual ~HuffmanNode() { }
+	virtual ~huffman_node() { }
 
 	virtual int weight() = 0;
 
-	virtual bool isLeaf() = 0;
+	virtual bool is_leaf() = 0;
 };
 
-class LeafNode : public HuffmanNode {
+class leaf_node : public huffman_node {
 private:
 	byte it;
 	int wgt;
 public:
-	LeafNode(const byte &val, int freq) {
+	leaf_node(const byte &val, int freq) {
 		this->it = val;
 		this->wgt = freq;
 	}
@@ -35,18 +35,18 @@ public:
 		return this->it;
 	}
 
-	bool isLeaf() {
+	bool is_leaf() {
 		return true;
 	}
 };
 
-class IntlNode : public HuffmanNode {
+class internal_node : public huffman_node {
 private:
-	HuffmanNode *lc;
-	HuffmanNode *rc;
+	huffman_node *lc;
+	huffman_node *rc;
 	int wgt;
 public:
-	IntlNode(HuffmanNode *l, HuffmanNode *r) {
+	internal_node(huffman_node *l, huffman_node *r) {
 		this->lc = l;
 		this->rc = r;
 		this->wgt = l->weight() + r->weight();
@@ -56,32 +56,32 @@ public:
 		return this->wgt;
 	}
 
-	bool isLeaf() {
+	bool is_leaf() {
 		return false;
 	}
 
-	HuffmanNode *left() const {
+	huffman_node *left() const {
 		return this->lc;
 	}
 
-	HuffmanNode *right() const {
+	huffman_node *right() const {
 		return this->rc;
 	}
 
-	void setLeft(HuffmanNode *l) {
+	void set_left(huffman_node *l) {
 		this->lc = l;
 	}
 
-	void setRight(HuffmanNode *r) {
+	void set_right(huffman_node *r) {
 		this->rc = r;
 	}
 };
 
 template<typename E, typename Comp>
-class Heap {
+class heap {
 public:
-	Heap(E *h, int num, int max) {
-		this->heap = h;
+	heap(E *h, int num, int max) {
+		this->buffer = h;
 		this->n = num;
 		this->maxSize = max;
 	}
@@ -90,15 +90,15 @@ public:
 		return n;
 	}
 
-	bool isLeaf(int pos) const {
+	bool is_leaf(int pos) const {
 		return (pos >= n / 2) && (pos < n);
 	}
 
-	int leftChild(int pos) const {
+	int left_child(int pos) const {
 		return pos * 2 + 1;
 	}
 
-	int rightChild(int pos) const {
+	int right_child(int pos) const {
 		return pos * 2 + 2;
 	}
 
@@ -106,42 +106,42 @@ public:
 		return (pos - 1) / 2;
 	}
 
-	void buildHeap() {
+	void build_heap() {
 		for (int i = n / 2 - 1; i >= 0; i--) {
 			siftdown(i);
 		}
 	}
 
-	E removeFirst() {
-		swap(heap, 0, --n);
+	E remove_first() {
+		swap(buffer, 0, --n);
 		if (n != 0) {
 			siftdown(0);
 		}
-		return heap[n];
+		return buffer[n];
 	}
 
 	void insert(const E &it) {
 		int curr = n++;
-		this->heap[curr] = it;
+		this->buffer[curr] = it;
 		while ((curr != 0) &&
-			Comp::smaller(heap[curr], heap[parent(curr)])) {
-			swap(this->heap, curr, parent(curr));
+			Comp::smaller(buffer[curr], buffer[parent(curr)])) {
+			swap(this->buffer, curr, parent(curr));
 			curr = parent(curr);
 		}
 	}
 
 private:
 	void siftdown(int pos) {
-		while (!isLeaf(pos)) {
-			int j = leftChild(pos);
-			int rc = rightChild(pos);
-			if ((rc < n) && Comp::smaller(heap[rc], heap[j])) {
+		while (!is_leaf(pos)) {
+			int j = left_child(pos);
+			int rc = right_child(pos);
+			if ((rc < n) && Comp::smaller(buffer[rc], buffer[j])) {
 				j = rc;
 			}
-			if (Comp::smaller(heap[pos], heap[j])) {
+			if (Comp::smaller(buffer[pos], buffer[j])) {
 				return;
 			}
-			swap(heap, pos, j);
+			swap(buffer, pos, j);
 			pos = j;
 		}
 	}
@@ -153,17 +153,17 @@ private:
 	}
 
 private:
-	E *heap;
+	E *buffer;
 	int n;
 	int maxSize;
 };
 
 template<typename E, typename Comp>
-class PriorityQueue {
+class priority_queue {
 public:
-	PriorityQueue(E *buffer, int num, int max)
-		: heap(buffer, num, max) {
-		this->heap.buildHeap();
+	priority_queue(E *heap, int num, int max)
+		: heap(heap, num, max) {
+		this->heap.build_heap();
 	}
 
 	void enqueue(const E &it) {
@@ -171,7 +171,7 @@ public:
 	}
 
 	E dequeue() {
-		return this->heap.removeFirst();
+		return this->heap.remove_first();
 	}
 
 	int size() const {
@@ -179,11 +179,11 @@ public:
 	}
 
 private:
-	Heap<E, Comp> heap;
+	heap<E, Comp> heap;
 };
 
 template <typename T>
-class HuffmanTreeCompare {
+class huffman_tree_compare {
 public:
 	static bool smaller(const T *l, const T *r) {
 		return l->weight() < r->weight();
@@ -194,68 +194,67 @@ public:
 	}
 };
 
-class EncodeMap {
+class encode_map {
 public:
-	void setCode(const byte &key, const std::string &code) {
-		this->codeMap[key] = code;
+	void set_code(const byte &key, const std::string &code) {
+		this->code_map[key] = code;
 	}
 
-	const std::string &getCode(const byte &key) {
-		return this->codeMap[key];
+	const std::string &get_code(const byte &key) {
+		return this->code_map[key];
 	}
 
 private:
-	std::map<byte, std::string> codeMap;
+	std::map<byte, std::string> code_map;
 };
 
 
-class HuffmanFileEncoder {
+class huffman_file_encoder {
 public:
-	HuffmanFileEncoder(const EncodeMap& codeMap) {
-		this->encodeMap = codeMap;
-		this->codeLength = 0;
+	huffman_file_encoder(const encode_map& code_map) {
+		this->encode_map = code_map;
+		this->code_length = 0;
 		this->start = this->end = 0;
 	}
-	void encodeFile(std::istream& in) {
+	void encode_file(std::istream& in) {
 		this->in = &in;
 	}
-	int writeToFile(std::ostream& out) {
+	int write_to_file(std::ostream& out) {
 		byte b;
 		while (this->in->read((char*)&b, sizeof(byte))) {
-			const std::string& code = encodeMap.getCode(b);
-			writeCodeToBuffer(code);
-			writeBufferToFile(out);
+			const std::string& code = encode_map.get_code(b);
+			write_code_to_buffer(code);
+			write_buffer_to_file(out);
 		}
 		int n = min(end - start, 8);
 		if (n == 0) {
-			return this->codeLength;
+			return this->code_length;
 		}
-		this->codeLength += n;
-		b = stringToByte(&buffer[start], n);
+		this->code_length += n;
+		b = string_to_byte(&heap[start], n);
 		out.write((char*)&b, sizeof(b));
 		start += n;
 
-		return codeLength;
+		return code_length;
 	}
 private:
-	void writeCodeToBuffer(const std::string& code) {
-		std::cout << code;
-		strcpy(&buffer[end], code.c_str());
+	void write_code_to_buffer(const std::string& code) {
+		strcpy(&heap[end], code.c_str());
 		end += code.length();
 	}
-	void writeBufferToFile(std::ostream& out) {
+	void write_buffer_to_file(std::ostream& out) {
 		while (end - start > 8) {
-			byte b = stringToByte(&buffer[start], 8);
+			byte b = string_to_byte(&heap[start], 8);
 			out.write((char*)&b, sizeof(b));
 			start += 8;
-			codeLength += 8;
+			code_length += 8;
 		}
-		reloadBuffer();
+		reload_buffer();
 	}
-	void reloadBuffer() {
+	void reload_buffer() {
 		int i;
 		for (i = 0; i < end - start; i++) {
-			buffer[i] = buffer[i + start];
+			heap[i] = heap[i + start];
 		}
 		end -= start;
 		start = 0;
@@ -263,7 +262,7 @@ private:
 	static inline int min(int a, int b) {
 		return a < b ? a : b;
 	}
-	byte stringToByte(const char* str, int n) {
+	byte string_to_byte(const char* str, int n) {
 		byte c = 0;
 		int i;
 		for (i = 0; i < n; i++) {
@@ -273,68 +272,68 @@ private:
 	}
 private:
 	int start, end;
-	char buffer[256];
-	EncodeMap encodeMap;
-	int codeLength;
+	char heap[256];
+	encode_map encode_map;
+	int code_length;
 	std::istream *in;
 };
 
-class ByteToBitStreamAdapter {
+class byte_to_bit_stream_adapter {
 public:
-	ByteToBitStreamAdapter(std::istream& in)
+	byte_to_bit_stream_adapter(std::istream& in)
 		:in(in) {
 		this->pos = 0;
 		this->start = 0;
 	}
-	void init(int countOfBit) {
-		this->streamSizeOfBit = countOfBit;
-		in.read((char*)&this->buffer, sizeof(byte));
+	void init(int count_of_bit) {
+		this->stream_size_of_bit = count_of_bit;
+		in.read((char*)&this->heap, sizeof(byte));
 	}
 	bool end() {
-		return pos >= streamSizeOfBit;
+		return pos >= stream_size_of_bit;
 	}
-	int readBit() {
+	int read_bit() {
 		if (start >= 8) {
 			start = 0;
-			in.read((char*)&this->buffer, sizeof(byte));
+			in.read((char*)&this->heap, sizeof(byte));
 		}
-		int bit = (buffer & (1 << (7 - start))) ? 1 : 0;
+		int bit = (heap & (1 << (7 - start))) ? 1 : 0;
 		start++;
 		pos++;
 		return bit;
 	}
 private:
 	std::istream& in;
-	byte buffer;
+	byte heap;
 	int start;
 	int pos;
-	int streamSizeOfBit;
+	int stream_size_of_bit;
 };
 
-class HuffmanFileDecoder {
+class huffman_file_decoder {
 public:
-	HuffmanFileDecoder(HuffmanNode* tree) {
-		this->treeRoot = tree;
+	huffman_file_decoder(huffman_node* tree) {
+		this->tree_root = tree;
 	}
-	void decodeFile(std::istream& in, int codeLength) {
-		this->in = new ByteToBitStreamAdapter(in);
-		this->in->init(codeLength);
+	void decode_file(std::istream& in, int code_length) {
+		this->in = new byte_to_bit_stream_adapter(in);
+		this->in->init(code_length);
 	}
-	void writeToFile(std::ostream& out) {
+	void write_to_file(std::ostream& out) {
 		while (!in->end()) {
-			byte b = readEncodedByte();
+			byte b = read_encoded_byte();
 			out.write((char*)&b, sizeof(byte));
 		}
 	}
-	~HuffmanFileDecoder() {
+	~huffman_file_decoder() {
 		delete in;
 	}
 private:
-	byte readEncodedByte() {
-		HuffmanNode* node = this->treeRoot;
-		while (!node->isLeaf()) {
-			IntlNode* inode = static_cast<IntlNode*>(node);
-			int bit = this->in->readBit();
+	byte read_encoded_byte() {
+		huffman_node* node = this->tree_root;
+		while (!node->is_leaf()) {
+			internal_node* inode = static_cast<internal_node*>(node);
+			int bit = this->in->read_bit();
 			if (bit == 0) {
 				node = inode->left();
 			}
@@ -342,46 +341,46 @@ private:
 				node = inode->right();
 			}
 		}
-		LeafNode* leaf = static_cast<LeafNode*>(node);
+		leaf_node* leaf = static_cast<leaf_node*>(node);
 		return leaf->val();
 	}
 private:
-	HuffmanNode* treeRoot;
-	ByteToBitStreamAdapter *in;
-	byte buffer;
+	huffman_node* tree_root;
+	byte_to_bit_stream_adapter *in;
+	byte heap;
 };
 
-class HuffmanTree {
+class huffman_tree {
 private:
-	HuffmanNode *Root;
+	huffman_node *root_node;
 public:
-	HuffmanTree(const byte &val, int freq) {
-		this->Root = new LeafNode(val, freq);
+	huffman_tree(const byte &val, int freq) {
+		this->root_node = new leaf_node(val, freq);
 	}
 
-	HuffmanTree(HuffmanTree *l, HuffmanTree *r) {
-		this->Root = new IntlNode(l->root(), r->root());
+	huffman_tree(huffman_tree *l, huffman_tree *r) {
+		this->root_node = new internal_node(l->root(), r->root());
 	}
 
-	HuffmanNode *root() {
-		return this->Root;
+	huffman_node *root() {
+		return this->root_node;
 	}
 
 	int weight() const {
-		return this->Root->weight();
+		return this->root_node->weight();
 	}
 
-	static HuffmanTree *biuldHuffmanTree(
-		HuffmanTree **treeArray, int count) {
+	static huffman_tree *biuld_huffman_tree(
+		huffman_tree **tree_array, int count) {
 
-		PriorityQueue<HuffmanTree *, HuffmanTreeCompare<HuffmanTree>> *forest =
-			new PriorityQueue<HuffmanTree *, HuffmanTreeCompare<HuffmanTree>>(
-				treeArray, count, count);
-		HuffmanTree *temp1, *temp2, *temp3 = NULL;
+		priority_queue<huffman_tree *, huffman_tree_compare<huffman_tree>> *forest =
+			new priority_queue<huffman_tree *, huffman_tree_compare<huffman_tree>>(
+				tree_array, count, count);
+		huffman_tree *temp1, *temp2, *temp3 = NULL;
 		while (forest->size() > 1) {
 			temp1 = forest->dequeue();
 			temp2 = forest->dequeue();
-			temp3 = new HuffmanTree(temp1, temp2);
+			temp3 = new huffman_tree(temp1, temp2);
 			forest->enqueue(temp3);
 			delete temp1;
 			delete temp2;
@@ -390,15 +389,15 @@ public:
 		return temp3;
 	}
 
-	void freeNodes() {
-		HuffmanNode* root = this->root();
-		std::queue<HuffmanNode*> q;
+	void free_nodes() {
+		huffman_node* root = this->root();
+		std::queue<huffman_node*> q;
 		q.push(root);
 		while (!q.empty()) {
-			HuffmanNode *node = q.front();
+			huffman_node *node = q.front();
 			q.pop();
-			if (!node->isLeaf()) {
-				IntlNode* inode = static_cast<IntlNode*>(node);
+			if (!node->is_leaf()) {
+				internal_node* inode = static_cast<internal_node*>(node);
 				if (inode->left() != NULL) {
 					q.push(inode->left());
 				}
@@ -410,36 +409,36 @@ public:
 		}
 	}
 
-	HuffmanFileEncoder toFileEncoder() {
+	huffman_file_encoder to_file_encoder() {
 		std::string code;
-		EncodeMap encodeMap;
-		travel(this->root(), code, encodeMap);
-		return HuffmanFileEncoder(encodeMap);
+		encode_map encode_map;
+		travel(this->root(), code, encode_map);
+		return huffman_file_encoder(encode_map);
 	}
 
-	HuffmanFileDecoder toFileDecoder() {
-		return HuffmanFileDecoder(this->root());
+	huffman_file_decoder to_file_decoder() {
+		return huffman_file_decoder(this->root());
 	}
 
-	~HuffmanTree() { }
+	~huffman_tree() { }
 private:
-	void travel(HuffmanNode* node, std::string& code, 
-		EncodeMap& encodeMap) {
+	void travel(huffman_node* node, std::string& code, 
+		encode_map& encode_map) {
 
-		if (node->isLeaf()) {
-			LeafNode* leaf = static_cast<LeafNode*>(node);
-			encodeMap.setCode(leaf->val(), code);
+		if (node->is_leaf()) {
+			leaf_node* leaf = static_cast<leaf_node*>(node);
+			encode_map.set_code(leaf->val(), code);
 		}
 		else {
-			IntlNode* inode = static_cast<IntlNode*>(node);
+			internal_node* inode = static_cast<internal_node*>(node);
 			if (inode->left() != NULL) {
 				code.push_back('0');
-				travel(inode->left(), code, encodeMap);
+				travel(inode->left(), code, encode_map);
 				code.pop_back();
 			}
 			if (inode->right() != NULL) {
 				code.push_back('1');
-				travel(inode->right(), code, encodeMap);
+				travel(inode->right(), code, encode_map);
 				code.pop_back();
 			}
 		}
@@ -447,57 +446,57 @@ private:
 };
 
 
-class ByteCountTable {
+class byte_count_table {
 public:
-	void loadFromFile(std::istream &in) {
+	void load_from_file(std::istream &in) {
 		byte b;
 		while (in.read((char *)&b, sizeof(byte))) {
-			this->byteCounts[b]++;
+			this->byte_counts[b]++;
 		}
 	}
 
-	void saveToFile(std::ostream& out) {
-		int tableSize = byteCounts.size();
-		out.write((char*)&tableSize, sizeof(int));
+	void save_to_file(std::ostream& out) {
+		int table_size = byte_counts.size();
+		out.write((char*)&table_size, sizeof(int));
 
-		for (auto& kv : this->byteCounts) {
+		for (auto& kv : this->byte_counts) {
 			out.write((char*)&kv.first, sizeof(kv.first));
 			out.write((char*)&kv.second, sizeof(kv.second));
 		}
 	}
 
-	void readFromFile(std::istream& in) {
+	void read_from_file(std::istream& in) {
 
-		int tableSize;
-		in.read((char*)&tableSize, sizeof(int));
+		int table_size;
+		in.read((char*)&table_size, sizeof(int));
 
 		int i;
-		for (i = 0; i < tableSize; i++){
+		for (i = 0; i < table_size; i++){
 			byte b;
 			int count;
 			in.read((char*)&b, sizeof(byte));
 			in.read((char*)&count, sizeof(int));
-			this->byteCounts[b] = count;
+			this->byte_counts[b] = count;
 		}
 	}
 
-	HuffmanTree **toSimpleHuffmanForest() {
+	huffman_tree **to_simple_huffman_forest() {
 
-		std::vector<HuffmanTree*> tmpForest;
+		std::vector<huffman_tree*> tmp_forest;
 		size_t i;
 		for (i = 0; i < 256; i++) {
-			if (this->byteCounts[static_cast<byte>(i)] != 0) {
+			if (this->byte_counts[static_cast<byte>(i)] != 0) {
 
-				HuffmanTree *tmp = new HuffmanTree(
+				huffman_tree *tmp = new huffman_tree(
 					static_cast<byte>(i),
-					this->byteCounts[static_cast<byte>(i)]);
-				tmpForest.push_back(tmp);
+					this->byte_counts[static_cast<byte>(i)]);
+				tmp_forest.push_back(tmp);
 			}
 		}
-		HuffmanTree **forest = new HuffmanTree *[tmpForest.size()];
-		this->count = tmpForest.size();
-		for (i = 0; i < tmpForest.size(); i++) {
-			forest[i] = tmpForest[i];
+		huffman_tree **forest = new huffman_tree *[tmp_forest.size()];
+		this->count = tmp_forest.size();
+		for (i = 0; i < tmp_forest.size(); i++) {
+			forest[i] = tmp_forest[i];
 		}
 		return forest;
 	}
@@ -507,53 +506,53 @@ public:
 	}
 
 private:
-	std::map<byte, int> byteCounts;
+	std::map<byte, int> byte_counts;
 	int count;
 };
 
-class HuffmanFileCompressor{
+class huffman_file_compressor{
 public:
 	void compress(std::istream& in, std::ostream& out) {
-		ByteCountTable table;
-		table.loadFromFile(in);
-		table.saveToFile(out);
-		HuffmanTree** forest = table.toSimpleHuffmanForest();
-		HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
+		byte_count_table table;
+		table.load_from_file(in);
+		table.save_to_file(out);
+		huffman_tree** forest = table.to_simple_huffman_forest();
+		huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
 
 		in.clear();
 		in.seekg(0, std::ios::beg);
 
-		HuffmanFileEncoder encoder = tree->toFileEncoder();
-		encoder.encodeFile(in);
-		int lengthOffset = out.tellp();
+		huffman_file_encoder encoder = tree->to_file_encoder();
+		encoder.encode_file(in);
+		int length_offset = out.tellp();
 		out.seekp(sizeof(int), std::ios::cur);
-		int length = encoder.writeToFile(out);
-		out.seekp(lengthOffset, std::ios::beg);
+		int length = encoder.write_to_file(out);
+		out.seekp(length_offset, std::ios::beg);
 		out.write((char*)&length, sizeof(int));
 
-		tree->freeNodes();
+		tree->free_nodes();
 		delete forest;
 		delete tree;
 	}
 };
 
-class HuffmanFileExtractor {
+class huffman_file_extractor {
 public:
 	void extract(std::istream& in, std::ostream& out) {
-		ByteCountTable table;
-		table.readFromFile(in);
-		HuffmanTree** forest = table.toSimpleHuffmanForest();
-		HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
+		byte_count_table table;
+		table.read_from_file(in);
+		huffman_tree** forest = table.to_simple_huffman_forest();
+		huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
 
 		int length;
 		int offset = in.tellg();
 		in.read((char*)&length, sizeof(int));
 
-		HuffmanFileDecoder decoder = tree->toFileDecoder();
-		decoder.decodeFile(in, length);
-		decoder.writeToFile(out);
+		huffman_file_decoder decoder = tree->to_file_decoder();
+		decoder.decode_file(in, length);
+		decoder.write_to_file(out);
 
-		tree->freeNodes();
+		tree->free_nodes();
 		delete forest;
 		delete tree;
 	}
@@ -563,83 +562,83 @@ public:
 #include <stdlib.h>
 #include <crtdbg.h>
 
-void testTree() {
+void test_tree() {
 
 	std::ifstream in("test.txt");
-	ByteCountTable table;
-	table.loadFromFile(in);
+	byte_count_table table;
+	table.load_from_file(in);
 	in.close();
-	HuffmanTree** forest = table.toSimpleHuffmanForest();
-	HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
+	huffman_tree** forest = table.to_simple_huffman_forest();
+	huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
 
-	tree->freeNodes();
+	tree->free_nodes();
 	delete forest;
 	delete tree;
 }
 
-void testEncode() {
+void test_encode() {
 
 	std::ifstream in("test.txt");
 	std::ofstream out("comp.txt");
-	ByteCountTable table;
-	table.loadFromFile(in);
-	HuffmanTree** forest = table.toSimpleHuffmanForest();
-	HuffmanTree* tree = HuffmanTree::biuldHuffmanTree(forest, table.size());
+	byte_count_table table;
+	table.load_from_file(in);
+	huffman_tree** forest = table.to_simple_huffman_forest();
+	huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
 
 	in.clear();
 	in.seekg(0, std::ios::beg);
 
-	HuffmanFileEncoder encoder = tree->toFileEncoder();
-	encoder.encodeFile(in);
-	int length = encoder.writeToFile(out);
+	huffman_file_encoder encoder = tree->to_file_encoder();
+	encoder.encode_file(in);
+	int length = encoder.write_to_file(out);
 
 	in.close();
 	out.close();
 
-	HuffmanFileDecoder decoder = tree->toFileDecoder();
+	huffman_file_decoder decoder = tree->to_file_decoder();
 	std::ifstream cmp("comp.txt", std::ios::binary);
 	std::ofstream ex("ext.txt", std::ios::binary);
-	decoder.decodeFile(cmp, length);
-	decoder.writeToFile(ex);
+	decoder.decode_file(cmp, length);
+	decoder.write_to_file(ex);
 
-	tree->freeNodes();
+	tree->free_nodes();
 	delete forest;
 	delete tree;
 }
 
-void testCompress() {
+void test_compress() {
 	std::ifstream in("test.txt", std::ios::binary);
 	std::ofstream out("compressed.txt", std::ios::binary);
 
-	HuffmanFileCompressor compressor;
+	huffman_file_compressor compressor;
 	compressor.compress(in, out);
 
 	in.close();
 	out.close();
 }
 
-void testExtract() {
+void test_extract() {
 	std::ifstream in("compressed.txt", std::ios::binary);
 	std::ofstream out("extracted.txt", std::ios::binary);
 
-	HuffmanFileExtractor extractor;
+	huffman_file_extractor extractor;
 	extractor.extract(in, out);
 
 	in.close();
 	out.close();
 }
 
-void testCompressAndExtract() {
+void test_compress_and_extract() {
 
-	testCompress();
-	testExtract();
+	test_compress();
+	test_extract();
 }
 
 int main() {
 
-	testTree();
-	testEncode();
-	testCompressAndExtract();
+	test_tree();
+	test_encode();
+	test_compress_and_extract();
 
 	_CrtDumpMemoryLeaks();
 
