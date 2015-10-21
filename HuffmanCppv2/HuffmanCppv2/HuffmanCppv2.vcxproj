@@ -144,6 +144,22 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="byte_count_map.h" />
+    <ClInclude Include="byte_to_bit_stream_adapter.h" />
+    <ClInclude Include="def.h" />
+    <ClInclude Include="encode_map.h" />
+    <ClInclude Include="heap.h" />
+    <ClInclude Include="huffman_file_compressor.h" />
+    <ClInclude Include="huffman_file_decoder.h" />
+    <ClInclude Include="huffman_file_encoder.h" />
+    <ClInclude Include="huffman_file_extractor.h" />
+    <ClInclude Include="huffman_node.h" />
+    <ClInclude Include="huffman_tree.h" />
+    <ClInclude Include="internal_node.h" />
+    <ClInclude Include="leaf_node.h" />
+    <ClInclude Include="priority_queue.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

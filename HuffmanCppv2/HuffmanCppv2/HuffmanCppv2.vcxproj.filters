@@ -19,4 +19,48 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="byte_count_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="byte_to_bit_stream_adapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="def.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="encode_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_file_compressor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_file_decoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_file_encoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="internal_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="leaf_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="priority_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="huffman_file_extractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
