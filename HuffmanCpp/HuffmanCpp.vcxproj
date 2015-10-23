@@ -142,8 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="byte_count_map.h" />
-    <ClInclude Include="byte_to_bit_stream_adapter.h" />
+    <ClInclude Include="byte_freq_map.h" />
+    <ClInclude Include="byte_to_bit_adapter.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="encode_map.h" />
     <ClInclude Include="heap.h" />
@@ -158,6 +158,13 @@
     <ClInclude Include="priority_queue.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="byte_freq_map.cpp" />
+    <ClCompile Include="byte_to_bit_adapter.cpp" />
+    <ClCompile Include="encode_map.cpp" />
+    <ClCompile Include="huffman_file_compressor.cpp" />
+    <ClCompile Include="huffman_file_decoder.cpp" />
+    <ClCompile Include="huffman_file_encoder.cpp" />
+    <ClCompile Include="huffman_tree.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>

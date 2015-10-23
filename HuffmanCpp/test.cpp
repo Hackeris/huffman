@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "byte_count_map.h"
+#include "byte_freq_map.h"
 #include "huffman_tree.h"
 #include "huffman_file_encoder.h"
 #include "huffman_file_compressor.h"
@@ -13,7 +13,7 @@
 void test_tree() {
 
 	std::ifstream in("test.txt");
-	byte_count_table table;
+	byte_freq_map table;
 	table.load_from_file(in);
 	in.close();
 	huffman_tree** forest = table.to_simple_huffman_forest();
@@ -28,7 +28,7 @@ void test_encode() {
 
 	std::ifstream in("test.txt");
 	std::ofstream out("comp.txt");
-	byte_count_table table;
+	byte_freq_map table;
 	table.load_from_file(in);
 	huffman_tree** forest = table.to_simple_huffman_forest();
 	huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());

@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="byte_count_map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="byte_to_bit_stream_adapter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="def.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,12 +51,39 @@
     <ClInclude Include="priority_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="byte_freq_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="byte_to_bit_adapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="byte_freq_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="byte_to_bit_adapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="encode_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_compressor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_decoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_encoder.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

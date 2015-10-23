@@ -3,13 +3,13 @@
 
 #include "def.h"
 #include <iostream>
-#include "byte_count_map.h"
+#include "byte_freq_map.h"
 #include "huffman_tree.h"
 
 class huffman_file_extractor {
 public:
 	void extract(std::istream& in, std::ostream& out) {
-		byte_count_table table;
+		byte_freq_map table;
 		table.read_from_file(in);
 		huffman_tree** forest = table.to_simple_huffman_forest();
 		huffman_tree* tree = huffman_tree::biuld_huffman_tree(forest, table.size());
