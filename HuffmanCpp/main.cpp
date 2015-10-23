@@ -31,8 +31,8 @@ public:
 	int execute() {
 
 		huffman_file_compressor compressor;
-		std::ifstream in(input_file_path);
-		std::ofstream out(output_file_path);
+		std::ifstream in(input_file_path, std::ios::binary);
+		std::ofstream out(output_file_path, std::ios::binary);
 		compressor.compress(in, out);
 		in.close();
 		out.close();
@@ -52,8 +52,8 @@ public:
 	int execute() {
 
 		huffman_file_extractor extractor;
-		std::ifstream in(input_file_path);
-		std::ofstream out(output_file_path);
+		std::ifstream in(input_file_path, std::ios::binary);
+		std::ofstream out(output_file_path, std::ios::binary);
 		extractor.extract(in, out);
 		in.close();
 		out.close();
