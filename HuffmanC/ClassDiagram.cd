@@ -1,70 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Struct Name="_byte_to_bit_stream" Collapsed="true">
-    <Position X="0.5" Y="7.5" Width="1.5" />
+  <Struct Name="_byte_to_bit_stream">
+    <Position X="0.5" Y="5.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>gACAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAAAgA=</HashCode>
       <FileName>decode.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="_byte_code_map" Collapsed="true">
-    <Position X="4.5" Y="5.5" Width="1.5" />
+  <Struct Name="_byte_code_map">
+    <Position X="4.5" Y="4" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>encode.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="_huffman_node" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+  <Struct Name="_huffman_node">
+    <Position X="0.5" Y="2.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAIACAAAAAAAAAAgAA=</HashCode>
       <FileName>huffman.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="_byte_freq_map" Collapsed="true">
-    <Position X="4.5" Y="2.5" Width="1.5" />
+  <Struct Name="_byte_freq_map">
+    <Position X="4.5" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>huffman.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Typedef Name="byte_to_bit_stream" Collapsed="true">
-    <Position X="0.5" Y="9.5" Width="1.5" />
+    <Position X="0.5" Y="4.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>decode.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="byte_code_map" Collapsed="true">
-    <Position X="4.5" Y="7.5" Width="1.5" />
+    <Position X="4.5" Y="3" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>encode.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="byte" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="5.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>def.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="huffman_node" Collapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="1.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>huffman.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="huffman_tree" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>huffman.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="byte_freq_map" Collapsed="true">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="2" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>huffman.h</FileName>
