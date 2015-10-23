@@ -97,7 +97,7 @@ public:
 	}
 	char* get_command_file_name() {
 		char *cmd = &argv[0][strlen(argv[0]) -1];
-		while (*cmd != '\\') {
+		while (*cmd != '\\' && *cmd != '/') {
 			cmd--;
 		}
 		return ++cmd;

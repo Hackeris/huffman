@@ -5,7 +5,7 @@
 char* get_command_file_name(char* path) {
 
 	path = &path[strlen(path) - 1];
-	while (*path != '\\') {
+	while (*path != '\\' && *path != '/') {
 		path--;
 	}
 	return ++path;
