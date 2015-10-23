@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="application" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>main.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="command" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>main.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="compress_command" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAEAAAQAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>main.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="extract_command" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAQAAAAABAAAAAAAAAAAAE=</HashCode>
+      <FileName>main.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_app" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAQAAACAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>main.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="byte_freq_map" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIABIAAAAAABAAAAQAgAACAAAAAAAA=</HashCode>
+      <FileName>byte_freq_map.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="byte_to_bit_adapter" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACAIAACAIAAAAAAAAAAAQAAAAAAAAIAAABAAAAAAAA=</HashCode>
+      <FileName>byte_to_bit_adapter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="encode_map" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACIAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>encode_map.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="heap&lt;E, Comp&gt;" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABgAAABAEABAAIAAAAAAAAAAAAAAEwFACAAACAI=</HashCode>
+      <FileName>heap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_file_compressor" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>huffman_file_compressor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_file_decoder" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAEEAAACAAAAAAEAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>huffman_file_decoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_file_encoder" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAIAASAAAQAAAgAIAAAAABAAgAAAAAgAJwAAAAAAA=</HashCode>
+      <FileName>huffman_file_encoder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_file_extractor" Collapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>huffman_file_extractor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_node" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAgAAAACAAAAAA=</HashCode>
+      <FileName>huffman_node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_tree_compare&lt;T&gt;" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>huffman_tree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="huffman_tree" Collapsed="true">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAQAQAACAAAAAggAAAAIAAAAAkAAgAAAAAAAA=</HashCode>
+      <FileName>huffman_tree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="internal_node" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAgAAAACAAAEQIAAAAAAAAAAIAAAgAAAACAAAgAA=</HashCode>
+      <FileName>internal_node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="leaf_node" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAQAAAAAAAAAACAAACgAAAACAAAAAA=</HashCode>
+      <FileName>leaf_node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="priority_queue&lt;E, Comp&gt;" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAIAAAAAEAAAAAAAAAABAAAAAQAA=</HashCode>
+      <FileName>priority_queue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="byte" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>def.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>
