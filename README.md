@@ -9,6 +9,8 @@ Huffman in C and C++
 
 * UNIX & OS X & Linux
 
+```bash
+
     # C version
     cd HuffmanC
     gcc *.c -o HuffmanC
@@ -17,3 +19,4 @@ Huffman in C and C++
     cd HuffmanCpp
     g++ *.cpp -o HuffmanCpp
 
+```
