@@ -22,8 +22,6 @@ typedef struct _byte_freq_map {
 
 byte_freq_map* get_freq_map(FILE* fp);
 
-int get_available_count_of_map_item(byte_freq_map* fmap);
-
 void save_freq_map(byte_freq_map *bfmap, FILE* fp);
 
 byte_freq_map* read_freq_map(FILE* fp);

@@ -6,9 +6,6 @@
 #include "huffman_file_compressor.h"
 #include "huffman_file_extractor.h"
 
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
 
 void test_tree() {
 
@@ -81,6 +78,10 @@ void test_compress_and_extract() {
 	test_compress();
 	test_extract();
 }
+
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
 //int main() {
 //

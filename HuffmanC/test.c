@@ -4,10 +4,6 @@
 
 #include "file.h"
 
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-
 void test_freq_map() {
 
 	FILE* fp = fopen("test.txt", "rb");
@@ -103,6 +99,10 @@ void test_compress_and_extract() {
 	fclose(fp_com);
 	fclose(fp_ext);
 }
+
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
 //int main() {
 //
