@@ -8,7 +8,7 @@ class byte_to_bit_adapter {
 public:
 	byte_to_bit_adapter(std::istream& in);
 
-	void init(int count_of_bit);
+	void init(long long count_of_bit);
 
 	bool end();
 
@@ -18,8 +18,8 @@ private:
 	std::istream& in;
 	byte buffer;
 	int buffer_offset;
-	int offset;
-	int stream_size_of_bit;
+	long long offset;
+	long long stream_size_of_bit;
 };
 
 #endif

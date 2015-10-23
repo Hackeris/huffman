@@ -1,6 +1,6 @@
 #include "decode.h"
 
-byte_to_bit_stream* open_bit_stream(FILE* fp_in, int code_length) {
+byte_to_bit_stream* open_bit_stream(FILE* fp_in, long long code_length) {
 
 	byte_to_bit_stream* btb =
 		(byte_to_bit_stream*)malloc(sizeof(byte_to_bit_stream));
@@ -46,7 +46,7 @@ static byte read_decoded_byte(byte_to_bit_stream* in, huffman_tree* htree) {
 }
 
 void decode_to_file(huffman_tree* htree, FILE* fp_in,
-	FILE* fp_out, int code_length) {
+	FILE* fp_out, long long code_length) {
 
 	byte_to_bit_stream* btbs = open_bit_stream(fp_in, code_length);
 	while (!bfeof(btbs)) {

@@ -12,11 +12,11 @@ void huffman_file_compressor::compress(std::istream& in, std::ostream& out) {
 
 	huffman_file_encoder encoder = tree->to_file_encoder();
 	encoder.encode_file(in);
-	int length_offset = out.tellp();
-	out.seekp(sizeof(int), std::ios::cur);
-	int length = encoder.write_to_file(out);
+	std::streamoff length_offset = out.tellp();
+	out.seekp(sizeof(long long), std::ios::cur);
+	long long length = encoder.write_to_file(out);
 	out.seekp(length_offset, std::ios::beg);
-	out.write((char*)&length, sizeof(int));
+	out.write((char*)&length, sizeof(long long));
 
 	tree->free_nodes();
 	delete forest;

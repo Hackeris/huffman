@@ -6,7 +6,7 @@ byte_to_bit_adapter::byte_to_bit_adapter(std::istream& in)
 	this->buffer_offset = 0;
 }
 
-void byte_to_bit_adapter::init(int count_of_bit) {
+void byte_to_bit_adapter::init(long long count_of_bit) {
 	this->stream_size_of_bit = count_of_bit;
 	in.read((char*)&this->buffer, sizeof(byte));
 }

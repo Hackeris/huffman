@@ -12,7 +12,7 @@ class huffman_file_decoder {
 public:
 	huffman_file_decoder(huffman_node* tree);
 
-	void decode_file(std::istream& in, int code_length);
+	void decode_file(std::istream& in, long long code_length);
 
 	void write_to_file(std::ostream& out);
 

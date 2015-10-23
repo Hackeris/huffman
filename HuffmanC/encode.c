@@ -64,11 +64,11 @@ static void shift_left_buffer(char* buffer, int* start, int* end) {
 	}
 }
 
-int encode_file_to(byte_code_map* bcmap, FILE* fp_in, FILE* fp_out) {
+long long encode_file_to(byte_code_map* bcmap, FILE* fp_in, FILE* fp_out) {
 
 	char code_buffer[MAX_CODE_LENGTH];
 	int start = 0, end = 0;
-	int code_length = 0;
+	long long code_length = 0;
 
 	byte b;
 	fread(&b, sizeof(byte), 1, fp_in);

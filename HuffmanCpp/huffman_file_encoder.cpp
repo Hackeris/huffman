@@ -11,7 +11,7 @@ void huffman_file_encoder::encode_file(std::istream& in) {
 	this->in = &in;
 }
 
-int huffman_file_encoder::write_to_file(std::ostream& out) {
+long long huffman_file_encoder::write_to_file(std::ostream& out) {
 	byte b;
 	while (this->in->read((char*)&b, sizeof(byte))) {
 		const std::string& code = code_map.get_code(b);

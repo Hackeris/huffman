@@ -4,7 +4,7 @@ huffman_file_decoder::huffman_file_decoder(huffman_node* tree) {
 	this->tree_root = tree;
 }
 
-void huffman_file_decoder::decode_file(std::istream& in, int code_length) {
+void huffman_file_decoder::decode_file(std::istream& in, long long code_length) {
 	this->in = new byte_to_bit_adapter(in);
 	this->in->init(code_length);
 }

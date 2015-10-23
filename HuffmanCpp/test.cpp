@@ -38,7 +38,7 @@ void test_encode() {
 
 	huffman_file_encoder encoder = tree->to_file_encoder();
 	encoder.encode_file(in);
-	int length = encoder.write_to_file(out);
+	long long length = encoder.write_to_file(out);
 
 	in.close();
 	out.close();

@@ -13,6 +13,6 @@ byte_code_map* build_byte_to_code_map(huffman_tree* htree);
 
 void free_byte_to_code_map(byte_code_map* bcmap);
 
-int encode_file_to(byte_code_map* bcmap, FILE* fp_in, FILE* fp_out);
+long long encode_file_to(byte_code_map* bcmap, FILE* fp_in, FILE* fp_out);
 
 #endif

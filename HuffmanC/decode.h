@@ -6,16 +6,16 @@
 typedef struct _byte_to_bit_stream {
 	FILE* fp_in;
 	byte buffer;
-	int code_length;
-	int offset;
+	long long code_length;
+	long long offset;
 	int buffer_offset;
 }byte_to_bit_stream;
 
-byte_to_bit_stream* open_bit_stream(FILE* fp_in, int code_length);
+byte_to_bit_stream* open_bit_stream(FILE* fp_in, long long code_length);
 
 void close_bit_stream(byte_to_bit_stream* btbs);
 
 void decode_to_file(huffman_tree* htree, FILE* fp_in,
-	FILE* fp_out, int code_length);
+	FILE* fp_out, long long code_length);
 
 #endif

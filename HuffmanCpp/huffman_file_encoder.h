@@ -11,7 +11,7 @@ public:
 
 	void encode_file(std::istream& in);
 
-	int write_to_file(std::ostream& out);
+	long long write_to_file(std::ostream& out);
 
 private:
 	void write_code_to_buffer(const std::string& code);
@@ -27,7 +27,7 @@ private:
 	int start, end;
 	char buffer[256];
 	encode_map code_map;
-	int code_length;
+	long long code_length;
 	std::istream *in;
 };
 
