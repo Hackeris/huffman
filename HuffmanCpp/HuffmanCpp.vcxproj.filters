@@ -80,10 +80,13 @@
     <ClCompile Include="huffman_file_decoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="huffman_file_encoder.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="huffman_tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_encoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="huffman_file_extractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

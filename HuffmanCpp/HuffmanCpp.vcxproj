@@ -164,6 +164,7 @@
     <ClCompile Include="huffman_file_compressor.cpp" />
     <ClCompile Include="huffman_file_decoder.cpp" />
     <ClCompile Include="huffman_file_encoder.cpp" />
+    <ClCompile Include="huffman_file_extractor.cpp" />
     <ClCompile Include="huffman_tree.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
