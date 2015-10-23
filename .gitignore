@@ -1,6 +1,7 @@
 */Debug/
 .vs
 Debug
+Release
 *.sdf
 *.txt
 *.opensdf
