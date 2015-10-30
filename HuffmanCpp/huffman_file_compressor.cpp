@@ -1,5 +1,6 @@
 #include "huffman_file_compressor.h"
 
+//	压缩功能，统计符号频数，并将其保存到压缩文件，然后构造哈夫曼树，进行压缩，写入文件
 void huffman_file_compressor::compress(std::istream& in, std::ostream& out) {
 	byte_freq_map table;
 	table.load_from_file(in);

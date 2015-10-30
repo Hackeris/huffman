@@ -16,6 +16,8 @@ int huffman_tree::weight() const {
 	return this->root_node->weight();
 }
 
+// 构建哈夫曼树，传入一个由符号和权值构成的节点的森林，通过二叉堆
+// 按照哈夫曼树的构造算法进行构造
 huffman_tree *huffman_tree::biuld_huffman_tree(
 	huffman_tree **tree_array, int count) {
 
@@ -35,6 +37,8 @@ huffman_tree *huffman_tree::biuld_huffman_tree(
 	return temp3;
 }
 
+//	释放所有节点的内存
+//	对树进行层次遍历
 void huffman_tree::free_nodes() {
 	huffman_node* root = this->root();
 	std::queue<huffman_node*> q;
@@ -55,6 +59,7 @@ void huffman_tree::free_nodes() {
 	}
 }
 
+//	将哈夫曼树的结构转化成哈夫曼编码器，对文件进行编码
 huffman_file_encoder huffman_tree::to_file_encoder() {
 	std::string code;
 	encode_map encode_map;
@@ -62,12 +67,14 @@ huffman_file_encoder huffman_tree::to_file_encoder() {
 	return huffman_file_encoder(encode_map);
 }
 
+//	将哈夫曼树的结构转化成哈夫曼解码器，对文件进行解码
 huffman_file_decoder huffman_tree::to_file_decoder() {
 	return huffman_file_decoder(this->root());
 }
 
 huffman_tree::~huffman_tree() { }
 
+//	遍历哈夫曼树，生成
 void huffman_tree::travel(huffman_node* node, std::string& code,
 	encode_map& encode_map) {
 

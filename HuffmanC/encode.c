@@ -1,5 +1,7 @@
 #include "encode.h"
 
+//	对哈夫曼树进行DFS遍历，通过维护一个编码栈来记录当前节点对应的编码
+//	没遍历到叶子节点，拷贝编码栈中的编码串到符号编码映射表中
 static void travel_huffman_tree(huffman_node* node, byte_code_map* bcmap,
 	char* tmp_code, int *code_len) {
 
@@ -18,6 +20,7 @@ static void travel_huffman_tree(huffman_node* node, byte_code_map* bcmap,
 	}
 }
 
+//	通过哈夫曼树构建出符号到编码的映射表
 byte_code_map* build_byte_to_code_map(huffman_tree* htree) {
 
 	char tmp_code[256] = { 0 };
@@ -43,6 +46,7 @@ static int mini(int a, int b) {
 	return a < b ? a : b;
 }
 
+//	将01编码串，通过位运算转化为字节
 static byte string_to_byte(const char* str, int n) {
 	byte c = 0;
 	int i;
@@ -52,6 +56,7 @@ static byte string_to_byte(const char* str, int n) {
 	return c;
 }
 
+//	整理编码时所用到的缓冲区
 static void shift_left_buffer(char* buffer, int* start, int* end) {
 
 	if (*start > 8) {
@@ -64,6 +69,10 @@ static void shift_left_buffer(char* buffer, int* start, int* end) {
 	}
 }
 
+//	将输入文件中的符号通过编码映射表，编码后写入到输出文件中
+//	每读出一个符号，找到对应编码，放入编码缓冲
+//	编码缓冲中的串足够组成字节的时候，将其转化为字节，重复进行编码
+//	直到整个文件结束，将缓冲中的余下部分转为字节，不足8位用0补齐
 long long encode_file_to(byte_code_map* bcmap, FILE* fp_in, FILE* fp_out) {
 
 	char code_buffer[MAX_CODE_LENGTH];

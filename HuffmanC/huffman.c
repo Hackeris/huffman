@@ -6,7 +6,6 @@ byte_freq_map* get_freq_map(FILE* fp) {
 		(byte_freq_map*)malloc(sizeof(byte_freq_map));
 	memset(freq_map, 0, sizeof(byte_freq_map));
 
-
 	byte b;
 	fread(&b, sizeof(byte), 1, fp);
 	while (!feof(fp)) {
@@ -29,6 +28,7 @@ static int get_available_count_of_map_item(byte_freq_map* fmap) {
 	return available_count;
 }
 
+//	保存符号频数映射表到文件
 void save_freq_map(byte_freq_map *bfmap, FILE* fp) {
 
 	int count = get_available_count_of_map_item(bfmap);
@@ -43,6 +43,7 @@ void save_freq_map(byte_freq_map *bfmap, FILE* fp) {
 	}
 }
 
+//	从文件中读取符号频数映射表
 byte_freq_map* read_freq_map(FILE* fp) {
 
 	byte_freq_map* bmap = (byte_freq_map*)
@@ -65,6 +66,7 @@ static int huffman_cmp(const void* lc, const void* rc) {
 		- (*(huffman_tree**)rc)->freq);
 }
 
+//	将符号到频数的映射表转化为构造哈夫曼树前所需要的森林
 static huffman_tree** dump_to_forest(byte_freq_map* fmap, int* size) {
 
 	int available_count = get_available_count_of_map_item(fmap);
@@ -85,6 +87,7 @@ static huffman_tree** dump_to_forest(byte_freq_map* fmap, int* size) {
 	return forest;
 }
 
+//	将构造过程中的哈夫曼树重新按顺序插入到森林中
 static void insert_to_huffman_forest(huffman_tree *tree,
 	huffman_tree** forest, int* size) {
 
@@ -102,6 +105,9 @@ static huffman_tree *get_minimal_tree(huffman_tree** forest, int*size) {
 	return forest[--*size];
 }
 
+//	构建哈夫曼树，先将森林中的树按照权值进行排序，然后每取出两个权值最小的，组合出新的树
+//	放入森林，同时进行排序
+//	重复上述过程，直到森林中只留下一棵树
 huffman_tree *build_huffman_tree(byte_freq_map* fmap) {
 
 	int forest_size;

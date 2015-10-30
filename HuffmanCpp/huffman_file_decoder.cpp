@@ -9,6 +9,7 @@ void huffman_file_decoder::decode_file(std::istream& in, long long code_length) 
 	this->in->init(code_length);
 }
 
+//	从文件中读出编码，获得对应的，符号，写入解压后的文件
 void huffman_file_decoder::write_to_file(std::ostream& out) {
 	while (!in->end()) {
 		byte b = read_encoded_byte();

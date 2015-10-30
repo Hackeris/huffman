@@ -19,6 +19,7 @@ void close_bit_stream(byte_to_bit_stream* btbs) {
 	free(btbs);
 }
 
+//	从文件中读取字符，并转化为编码位流
 static int read_bit(byte_to_bit_stream* btbs) {
 
 	if (btbs->buffer_offset >= 8) {
@@ -45,6 +46,7 @@ static byte read_decoded_byte(byte_to_bit_stream* in, huffman_tree* htree) {
 	return hnode->value;
 }
 
+//	将输入文件中的编码，按照哈夫曼树的结构，解码后写入输出文件
 void decode_to_file(huffman_tree* htree, FILE* fp_in,
 	FILE* fp_out, long long code_length) {
 

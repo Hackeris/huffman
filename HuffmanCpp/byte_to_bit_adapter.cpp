@@ -1,5 +1,7 @@
 #include "byte_to_bit_adapter.h"
 
+
+//	将文件字节流转化为编码位流的适配器
 byte_to_bit_adapter::byte_to_bit_adapter(std::istream& in)
 	:in(in) {
 	this->offset = 0;

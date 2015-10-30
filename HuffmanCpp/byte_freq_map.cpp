@@ -1,5 +1,7 @@
 #include "byte_freq_map.h"
 
+
+//	符号频数统计表
 void byte_freq_map::load_from_file(std::istream &in) {
 	byte b;
 	while (in.read((char *)&b, sizeof(byte))) {
