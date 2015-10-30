@@ -21,8 +21,8 @@ int huffman_tree::weight() const {
 huffman_tree *huffman_tree::biuld_huffman_tree(
 	huffman_tree **tree_array, int count) {
 
-	priority_queue<huffman_tree *, huffman_tree_compare<huffman_tree>> *forest =
-		new priority_queue<huffman_tree *, huffman_tree_compare<huffman_tree>>(
+	priority_queue<huffman_tree *, huffman_tree_compare<huffman_tree> > *forest =
+		new priority_queue<huffman_tree *, huffman_tree_compare<huffman_tree> >(
 			tree_array, count, count);
 	huffman_tree *temp1, *temp2, *temp3 = NULL;
 	while (forest->size() > 1) {
